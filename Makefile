@@ -67,13 +67,17 @@ LIBNAMESO=libdarknet.so
 APPNAMESO=uselib
 endif
 
+CROSS_COMPILE = riscv64-unknown-linux-gnu-
+AR = $(CROSS_COMPILE)ar
 ifeq ($(USE_CPP), 1)
 CC=g++
 else
-CC=gcc
+#CC=gcc
+CC = $(CROSS_COMPILE)gcc
 endif
 
-CPP=g++ -std=c++11
+#CPP=g++ -std=c++11
+CPP=$(CROSS_COMPILE)g++ -std=c++11
 NVCC=nvcc
 OPTS=-Ofast
 LDFLAGS= -lm -pthread
